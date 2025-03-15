@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1">
+    <test name="CreateCus">
+<!--        <packages>-->
+<!--            <package name="bai7" />-->
+<!--        </packages>-->
+<!--        <classes>-->
+<!--            <class name="bai7.ExecuteTest" />-->
+<!--        </classes>-->
+        <classes>
+            <class name="bai7.ExecuteTest">
+                <methods>
+                    <include name="login1" />
+                </methods>
+            </class>
+            <class name="bai7.ExecuteTest">
+                <methods>
+                    <include name="login2" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -2,12 +2,12 @@
 
 <suite name="Suite" verbose="1">
     <test name="CreateCus">
-<!--        <packages>-->
-<!--            <package name="bai7" />-->
-<!--        </packages>-->
-<!--        <classes>-->
-<!--            <class name="bai7.ExecuteTest" />-->
-<!--        </classes>-->
+        <!--        <packages>-->
+        <!--            <package name="bai7" />-->
+        <!--        </packages>-->
+        <!--        <classes>-->
+        <!--            <class name="bai7.ExecuteTest" />-->
+        <!--        </classes>-->
         <classes>
             <class name="bai7.ExecuteTest">
                 <methods>

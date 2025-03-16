@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
-    <artifactId>testNG_thiet</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+1. Cài đặt JDK 17
+- Cài đặt biến môi trường JAVA_HOME trong environment, path là thư mục jdk17
+- Kiểm tra java version
+2. Cài đặt Intellij community, bỏ association .kt và .kts
+3. Tải apache maven
+- Cài biến môi trường MAVEN_HOME với thư mục apache-maven-3.9.9
+- Thêm path %MAVEN_HOME%\bin
+- Kiểm tra version maven
+4. Tạo project java - maven và cài đặt trong file pom.xml
+- Vào link: https://mvnrepository.com/
+- Cài đặt các tham số vào thẻ <dependencies>
++ slf4j-api
++ slf4j-simple
++ Selenium
++ TestNG
+- Đồng bộ lại maven trong file pom.xml
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
@@ -43,5 +44,8 @@
         </dependency>
 
     </dependencies>
+5. Assert: https://javadoc.io/doc/org.testng/testng/7.7.0/org/testng/asserts/Assertion.html
+6. Một vài định nghĩa 
+- Action Class là 1 thư viện cung cấp bởi selenium để xử lý các sự kiện của bàn phím và chuột
+- Robot Class là 1 thư viện cung cấp bởi java hỗ trợ điều khiển bàn phím: https://docs.oracle.com/javase/10/docs/api/java/awt/Robot.html
 
-</project>

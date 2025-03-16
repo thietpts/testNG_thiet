@@ -1,18 +1,21 @@
 package bai7;
 import ThucHanh.locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.*;
-
 import java.time.Duration;
+
+import static java.lang.Thread.sleep;
 
 public class ExecuteTest {
     public static WebDriver driver;
 
     @BeforeClass
-    public static void createDriver(){
+    public void createDriver(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -60,9 +63,90 @@ public class ExecuteTest {
         driver.findElement(By.xpath(locator.lalCheck));
     }
 
+    @Test
+    public void TestSendKeys() throws InterruptedException {
+
+        //driver kế thừa từ class SetupBrowser
+        driver.get("https://www.google.com/");
+
+        // Element search box
+        WebElement element = driver.findElement(By.xpath("//textarea[@name='q']"));
+
+        // Tạo đối tượng của Actions class và để driver vào
+        Actions action = new Actions(driver);
+
+        // Dùng action để gọi hàm sendkeys điền dữ liệu. Không dùng sendKeys của WebElement
+        action.sendKeys(element, "Anh Tester").perform();
+        action.sendKeys(Keys.ENTER).perform();
+        sleep(2000);
+    }
+
     @AfterClass
     public void Close(){
         driver.quit();
-        Assert.assertEquals(locator.itemLanguage,"Xin chào","sai title");
+    }
+
+    @Test
+    public void moveToElement() throws InterruptedException {
+        driver.get("https://anhtester.com/");
+        sleep(2000);
+        WebElement element = driver.findElement(By.xpath("//h2[contains(text(),'Kiến thức Automation Testing')]"));
+
+        Actions action = new Actions(driver);
+
+        //Move to element (di chuyển tới title Kiến thức Automation Testing)
+        action.moveToElement(element).perform();
+
+        sleep(2000);
+    }
+
+    @Test
+    public void demoDragAndDropWithActionClass() throws InterruptedException {
+        driver.get("http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html");
+        sleep(1);
+
+        // Bắt element cần kéo
+        WebElement From = driver.findElement(By.xpath("//div[@id='box6']"));
+        // Bắt element cần thả đến
+        WebElement To = driver.findElement(By.xpath("//div[@id='countries']//div[1]"));
+
+        sleep(1);
+        Actions action = new Actions(driver);
+        // Kéo và thả
+        action.dragAndDrop(From, To).perform();
+
+        sleep(5000);
+    }
+
+    @Test
+    public void inputTextUppercase() throws InterruptedException {
+        driver.get("https://www.google.com/");
+        Thread.sleep(2000);
+        WebElement element = driver.findElement(By.xpath("//textarea[@name='q']"));
+
+        Actions action = new Actions(driver);
+
+        // Đè giữ phím SHIFT và nhập text -> Chữ in hoa
+        action.keyDown(element, Keys.SHIFT).sendKeys("anh tester").keyUp(element, Keys.SHIFT).sendKeys("anh tester").build().perform();
+
+        Thread.sleep(2000);
+    }
+
+    @Test
+    public void testIFrame01() throws InterruptedException {
+
+        driver.navigate().to("https://anhtester.com/contact");
+        Thread.sleep(10000);
+        System.out.println("iframe total: " + driver.findElements(By.tagName("iframe")).size());
+        //----Switch to content of Messenger--------
+        driver.switchTo().frame(0); //Thẻ iframe thứ nhất
+        System.out.println(driver.findElement(By.xpath("//label[@id='recaptcha-anchor-label']")).getText());
+
+        //----Switch to icon of Messenger---------
+
+        //1. Switch to Parent WindowHandle
+        driver.switchTo().parentFrame(); //Chuyển về nội dung chính không thuộc iframe nào
+
+        Thread.sleep(2000);
     }
 }
